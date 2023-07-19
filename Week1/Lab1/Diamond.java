@@ -1,4 +1,4 @@
-package Lab1;
+package Week1.Lab1;
 
 public class Diamond {
     public static void main(String[] args) {

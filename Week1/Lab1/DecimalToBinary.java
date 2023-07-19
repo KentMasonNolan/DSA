@@ -1,4 +1,4 @@
-package Lab1;
+package Week1.Lab1;
 
 public class DecimalToBinary {
     public static String decimalToBinary(int number) {
