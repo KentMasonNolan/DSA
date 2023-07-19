@@ -7,9 +7,7 @@ public class insertToArray {
         int size = 5;
         int number = 35;
 
-
         System.out.println(printArray(arr));
-
         System.out.println(printArray(addToArray(number,arr,size)));
     }
 
