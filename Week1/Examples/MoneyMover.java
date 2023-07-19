@@ -8,6 +8,8 @@ public class MoneyMover implements Runnable
     private final int SUM = 10; // total amount of money
     private Random generator;
 
+    private int counter = 0;
+
     public MoneyMover()
     {  accountA = 5;
         accountB = SUM-accountA;
@@ -29,12 +31,15 @@ public class MoneyMover implements Runnable
         }
         System.out.println("Problem: account A = " + accountA +
                 ", account B = " + accountB);
+        float percetage = 1/(float) counter;
+        System.out.println(percetage);
     }
 
     // transfer one dollar from account A to account B
     // note this method needs to be synchronized
     private void transferAToB()
     {  System.out.println("Transfering A to B");
+        counter++;
         if (accountA>0)
         {  accountA--;
             accountB++;
@@ -45,6 +50,7 @@ public class MoneyMover implements Runnable
     // note this method needs to be synchronized
     private void transferBToA()
     {  System.out.println("Transfering B to A");
+        counter++;
         if (accountB>0)
         {  accountB--;
             accountA++;
