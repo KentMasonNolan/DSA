@@ -11,6 +11,7 @@ public class LinkedList <E extends Comparable>{
 
         head = null;
         size = 0;
+
     }
 
     public void add(E data){
@@ -33,10 +34,21 @@ public class LinkedList <E extends Comparable>{
     }
 
 
-    public boolean contains(E data){
-        return false;
-        //TODO expand
+    public boolean contains(E data) {
+        if (size == 0 || data == null) {
+            return false; //exit because there is nothing to go over.
+        }
+
+        SetNode<E> currentNode = head;
+        while (currentNode != null) { //loop
+            if (currentNode.data.equals(data)) {
+                return true; //we found what we want
+            }
+            currentNode = currentNode.next;
+        }
+        return false; //data not there
     }
+
 
     public String toStringReversely(){
         return toStringReversely(head);
@@ -50,6 +62,6 @@ public class LinkedList <E extends Comparable>{
 
     public String toString() {
         return "Pants";
-        //TODO expand
+
     }
 }
