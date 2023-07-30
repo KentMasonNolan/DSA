@@ -61,7 +61,18 @@ public class LinkedList <E extends Comparable>{
 
 
     public String toString() {
-        return "Pants";
 
+        SetNode<E> currentNode = this.head; //sets current header
+        String output = ""; //we add everything to this
+
+        if (this.size == 0) {
+            return "Nothing there man"; //nothing there my man
+        }
+
+        for (int i = 0; i < this.size; i++) { //loop
+            output = output + currentNode.data.toString() + " "; //adds data to output string
+            currentNode = currentNode.next; // moves to the next node.
+        }
+        return output;
     }
 }
