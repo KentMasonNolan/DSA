@@ -55,8 +55,19 @@ public class LinkedList <E extends Comparable>{
     }
 
     public String toStringReversely(SetNode head){
-        return "Banana";
-        //TODO expand
+
+        SetNode<E> currentNode = this.head; //sets current header
+        String output = ""; //we add everything to this
+
+        if (this.size == 0) {
+            return "Nothing there man"; //nothing there my man
+        }
+
+        for (int i = 0; i < this.size; i++) { //loop
+            output = currentNode.data.toString() + " " + output; //adds data to output string
+            currentNode = currentNode.next; // moves to the next node.
+        }
+        return output;
     }
 
 
