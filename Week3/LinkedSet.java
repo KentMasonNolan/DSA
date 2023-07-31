@@ -1,13 +1,11 @@
 package Week3;
 
-import java.security.PublicKey;
-
-public class LinkedList <E extends Comparable>{
+public class LinkedSet<E extends Comparable>{
 
     SetNode head;
     int size;
 
-    public LinkedList(){
+    public LinkedSet(){
 
         head = null;
         size = 0;
