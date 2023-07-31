@@ -52,21 +52,35 @@ public class LinkedSet<E extends Comparable>{
         return toStringReversely(head);
     }
 
-    public String toStringReversely(SetNode head){
-
-        SetNode<E> currentNode = this.head; //sets current header
-        String output = ""; //we add everything to this
-
-        if (this.size == 0) {
-            return "Nothing there man"; //nothing there my man
+    private String toStringReversely(SetNode head) {
+        if (head == null) {
+            return "";
         }
 
-        for (int i = 0; i < this.size; i++) { //loop
-            output = currentNode.data.toString() + " " + output; //adds data to output string
-            currentNode = currentNode.next; // moves to the next node.
+        String dataString = head.data.toString();
+
+        if (head.next == null) {
+            return dataString;
         }
-        return output;
+
+        String restOfString = toStringReversely(head.next);
+        return restOfString + " " + dataString;
     }
+
+//        SetNode<E> currentNode = this.head; //sets current header
+//        String output = ""; //we add everything to this
+//
+//        if (this.size == 0) {
+//            return "Nothing there man"; //nothing there my man
+//        }
+//
+//        for (int i = 0; i < this.size; i++) { //loop
+//            output = currentNode.data.toString() + " " + output; //adds data to output string
+//            currentNode = currentNode.next; // moves to the next node.
+//        }
+//        return output;
+//    }
+
 
 
     public String toString() {
