@@ -3,12 +3,12 @@ package Lab4;
 public class LinkedList {
     Node head;
 
-    public void add(Node head, Node newNode){
+    public void add(Node head){
         if (head == null){
-            head = newNode;
+//            head = newNode;
         }
         else {
-            add(head, newNode);
+            add(head);
         }
     }
 
