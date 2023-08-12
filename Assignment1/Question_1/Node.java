@@ -11,18 +11,40 @@ package Assignment1.Question_1;
  */
 
 
-public class Node <E                 > {
+public class Node <E extends Comparable<E>> {
     
-    E data;
-    Node <E> next;
-    
-    public boolean equals(Node node)
-    {
-        return false;
+    private E data;
+    private Node <E> next;
+
+    public Node(E data){
+        this.data = data;
+        this.next = null;
     }
-    
-    public int compareTo(Node node)
-    {
-        return 0;
+
+    public E getData() {
+        return data;
+    }
+
+    public Node<E> getNext() {
+        return next;
+    }
+
+    public void setNext(Node<E> next) {
+        this.next = next;
+    }
+
+    public boolean equals(Node node) {
+        if (this == node) {
+            return true;
+        }
+        if (node == null) {
+            return false;
+        }
+        Node<?> other = (Node<?>) node;
+        return data.equals(other.data);
+    }
+
+    public int compareTo(Node<E> node) {
+        return data.compareTo(node.data);
     }
 }
