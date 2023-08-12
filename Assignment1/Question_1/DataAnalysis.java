@@ -9,7 +9,7 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class DataAnalysis <E extends Comparable>{
+public class DataAnalysis <E extends Comparable<E>>{
     private Queue <E> queue = new Queue();
     private Stack <E> stack = new Stack();
     private E[] data;

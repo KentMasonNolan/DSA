@@ -9,7 +9,7 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class LinkedList <E extends Comparable>{
+public class LinkedList <E extends Comparable<E>>{
     
     public int size = 0;
     public Node<E> head;

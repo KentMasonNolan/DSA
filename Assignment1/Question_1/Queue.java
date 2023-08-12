@@ -9,7 +9,7 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class Queue <E extends Comparable>{
+public class Queue <E extends Comparable<E>>{
     
     private LinkedList<E> queue = new LinkedList();
     
