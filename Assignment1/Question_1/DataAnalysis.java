@@ -13,12 +13,12 @@ public class DataAnalysis <E extends Comparable<E>>{
     private Queue <E> queue = new Queue();
     private Stack <E> stack = new Stack();
     private E[] data;
-    
+
     public DataAnalysis(E[] data)
     {
         this.data = data;
-    }    
-    
+    }
+
     public boolean isPalindrome()
     {
 

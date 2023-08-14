@@ -11,22 +11,22 @@ package Assignment1.Question_1;
  */
 public class Stack <E extends Comparable>{
     LinkedList<E> stack = new LinkedList();
-    
+
     public void push(E data)
     {
-        
+
     }
-    
+
     public E pop()
     {
         return null;
     }
-    
+
     public void printStack()
     {
-        
+
     }
-    
+
     public int getSize()
     {
         return 0;

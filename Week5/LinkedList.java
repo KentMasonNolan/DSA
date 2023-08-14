@@ -66,7 +66,6 @@ public class LinkedList {
 
     private Node toDoublyLinkedList(Node current){
         Node next;
-
         if (current.next != null){
             next = toDoublyLinkedList(current.next);
             next.prev = current;
