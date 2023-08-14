@@ -12,8 +12,8 @@ package Assignment1.Question_1;
 
 public class Node<E extends Comparable<E>> {
 
-    private E data;
-    private Node<E> next;
+    public E data;
+    public Node<E> next;
 
     public Node(E data) {
         this.data = data;

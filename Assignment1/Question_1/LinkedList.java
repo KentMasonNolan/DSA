@@ -13,47 +13,71 @@ public class LinkedList <E extends Comparable<E>>{
     
     public int size = 0;
     public Node<E> head;
-    
-    public void addHead(E data)
-    {
 
+    public void addHead(E data) {
+        Node<E> newNode = new Node<>(data);
+        newNode.next = head;
+        head = newNode;
+        size++;
     }
-    
-    public Node getHead()
-    {
-        return null;
-    }
-    
-    public void add(E data)
-    {
 
+    public Node<E> getHead() {
+        return head;
+    }
+
+    public void add(E data) {
+        Node<E> newNode = new Node<>(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node<E> current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+        size++;
     }
     
     private void add(Node head, Node node)
     {
 
     }
-    
-    public void printLinkedList()
-    {
 
+    public void printLinkedList() {
+        printLinkedList(head);
     }
-    
-    private void printLinkedList(Node node)
-    {
-        
+
+    private void printLinkedList(Node<E> node) {
+        if (node == null) {
+            System.out.println("Linked list is empty.");
+            return;
+        }
+        Node<E> current = node;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
     }
-    
-    public boolean contains(Node node)
-    {
-        return false;
+
+    public boolean contains(Node<E> node) {
+        return contains(head, node);
     }
-    
-    private boolean contains(Node head, Node node)
-    {
-        return false;
+
+    private boolean contains(Node<E> current, Node<E> target) {
+        if (current == null) {
+            return false;
+        }
+        if (current.equals(target)) {
+            return true;
+        }
+        return contains(current.next, target);
     }
-    
+
+    // todo up to here
+
+
     public void remove(Node node)
     {
 
