@@ -26,11 +26,20 @@ public class LinkedList {
         tail = current;
     }
 
+    public void printList(boolean reversely){
+        if (reversely)
+
+            printListReversly(head);
+
+        else printList(head);
+    }
+
     public void printList(Node current){
         System.out.println(current.data);
 
-        if (current.next != null)[
-                printList(current.next);
+        if (current.next != null){
+            printList(current.next);
+        }
     }
 
     private void printListReversly(Node current){
