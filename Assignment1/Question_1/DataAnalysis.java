@@ -9,19 +9,25 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class DataAnalysis <E extends Comparable<E>>{
-    private Queue <E> queue = new Queue();
-    private Stack <E> stack = new Stack();
+public class DataAnalysis<E extends Comparable<E>> {
+    private Queue<E> queue = new Queue<>();
+    private Stack<E> stack = new Stack<>();
     private E[] data;
 
-    public DataAnalysis(E[] data)
-    {
+    public DataAnalysis(E[] data) {
         this.data = data;
+        for (E element : data) {
+            queue.enqueue(element);
+            stack.push(element);
+        }
     }
 
-    public boolean isPalindrome()
-    {
-
-        return false;
+    public boolean isPalindrome() {
+        while (!stack.isEmpty() && !queue.isEmpty()) {
+            if (!stack.pop().equals(queue.dequeue())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
