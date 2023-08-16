@@ -6,11 +6,10 @@
 package Assignment1.Question_1;
 
 /**
- *
  * @author xhu
  */
-public class LinkedList <E extends Comparable<E>>{
-    
+public class LinkedList<E extends Comparable<E>> {
+
     public int size = 0;
     public Node<E> head;
 
@@ -38,9 +37,8 @@ public class LinkedList <E extends Comparable<E>>{
         }
         size++;
     }
-    
-    private void add(Node head, Node node)
-    {
+
+    private void add(Node head, Node node) {
 
     }
 
@@ -75,71 +73,127 @@ public class LinkedList <E extends Comparable<E>>{
         return contains(current.next, target);
     }
 
-    // todo up to here
+    public void remove(Node<E> node) {
+        if (head == null) {
+            return; // List is empty
+        }
+        if (head.equals(node)) {
+            head = head.next;
+            size--;
+            return;
+        }
+        removeFromBody(head, node);
+    }
 
+    public void remove(int position) {
+        if (position < 0 || position >= size) {
+            throw new IndexOutOfBoundsException("Invalid position");
+        }
+        if (position == 0) {
+            head = head.next;
+            size--;
+            return;
+        }
+        removeByIndex(head, position - 1);
+    }
 
-    public void remove(Node node)
-    {
+    private void removeByIndex(Node<E> current, int position) {
+        if (position < 0 || current == null || current.next == null) {
+            return;
+        }
+        if (position == 0) {
+            current.next = current.next.next;
+            size--;
+            return;
+        }
+        removeByIndex(current.next, position - 1);
+    }
 
+    private void removeFromBody(Node<E> current, Node<E> target) {
+        if (current == null || current.next == null) {
+            return; // Target node not found
+        }
+        if (current.next.equals(target)) {
+            current.next = current.next.next;
+            size--;
+            return;
+        }
+        removeFromBody(current.next, target);
     }
-    
-    public void remove(int position)
-    {
-        
-    }
-    
-    private void removeByIndex(Node head, int position)
-    {
 
+    public Node<E> removeFromHead() {
+        if (head == null) {
+            return null; // List is empty
+        }
+        Node<E> removedNode = head;
+        head = head.next;
+        size--;
+        return removedNode;
     }
-    
-    private void removeFromBody(Node head, Node node)
-    {
 
+    public Node<E> removeFromTail() {
+        if (head == null) {
+            return null; // List is empty
+        }
+        if (head.next == null) {
+            Node<E> removedNode = head;
+            head = null;
+            size--;
+            return removedNode;
+        }
+        return removeFromTail(head);
     }
-    
-    public Node removeFromHead()
-    {
-        return null;
-    }
-    
-    public Node removeFromTail()
-    {
-        return null;
-    }
-    
-    private Node removeFromTail(Node node)
-    {
-        return null;
-    }
-    
-    public void addInOrder(E data)
-    {
 
+    private Node<E> removeFromTail(Node<E> current) {
+        if (current.next.next == null) {
+            Node<E> removedNode = current.next;
+            current.next = null;
+            size--;
+            return removedNode;
+        }
+        return removeFromTail(current.next);
     }
-    
-    private void addInOrder(Node currentNode, Node newNode)
-    {
 
+    public void addInOrder(E data) {
+        Node<E> newNode = new Node<>(data);
+        if (head == null || data.compareTo(head.data) < 0) {
+            newNode.next = head;
+            head = newNode;
+            size++;
+            return;
+        }
+        addInOrder(head, newNode);
     }
-    
-    public Node getNode(int index)
-    {
-        return null;
+
+    private void addInOrder(Node<E> current, Node<E> newNode) {
+        if (current.next == null || newNode.data.compareTo(current.next.data) < 0) {
+            newNode.next = current.next;
+            current.next = newNode;
+            size++;
+            return;
+        }
+        addInOrder(current.next, newNode);
     }
-    
-    private Node getNode(int index, Node head)
-    {
-        return null;
+
+    public Node<E> getNode(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        return getNode(index, head);
     }
-    
-    public E getData(int index)
-    {
-        return null;
+
+    private Node<E> getNode(int index, Node<E> current) {
+        if (index == 0) {
+            return current;
+        }
+        return getNode(index - 1, current.next);
     }
-    
-    private E getData(int index, Node head)
-    {
-        return null;
-    }    
+
+    public E getData(int index) {
+        return getNode(index).data;
+    }
+
+    private E getData(int index, Node<E> current) {
+        return getNode(index, current).data;
+    }
 }
