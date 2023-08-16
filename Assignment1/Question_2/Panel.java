@@ -14,41 +14,75 @@ import javax.swing.JPanel;
  *
  * @author xhu
  */
-public class Panel extends JPanel implements KeyListener{
 
-    public Panel()
-    {
-        this.addKeyListener(this);     
-        this.setFocusable(true);         
+public class Panel extends JPanel implements KeyListener {
+    private Snake snake; // Add a reference to the Snake object
+    private char[][] grid; // Add the grid to represent the game area
+
+    public Panel() {
+        this.addKeyListener(this);
+        this.setFocusable(true);
+
+        // Initialize the snake and grid
+        snake = new Snake(5, 5); // Initialize the snake at position (5, 5)
+        grid = new char[10][10]; // Adjust the grid size as needed
+
+        // Place letters and numbers randomly on the grid
+        // For example:
+        // grid[3][4] = 'A';
+        // grid[7][2] = '2';
+        // ...
     }
-    
-    
-    public void paint(Graphics g)
-    {
-        paintComponent(g);
-        
-        //put your rendering code here
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Clear the panel
+        g.clearRect(0, 0, getWidth(), getHeight());
+
+        // Render the grid
+        int cellSize = getWidth() / grid.length;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if (grid[row][col] != 0) {
+                    g.drawString(String.valueOf(grid[row][col]),
+                            col * cellSize + cellSize / 2,
+                            row * cellSize + cellSize / 2);
+                }
+            }
+        }
+
+        // Render the snake and other game elements here
 
         repaint();
     }
 
-
     @Override
     public void keyTyped(KeyEvent ke) {
-        
-
+        // Handle key typed events
     }
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        //example code of getting the pressed key
-        System.out.println("\""+ke.getKeyChar()+"\" is typed.");
-        // Write your code here to control your snake
-    
+        // Handle key pressed events to control the snake
+        char keyChar = ke.getKeyChar();
+
+        if (keyChar == 'w') {
+            snake.changeDirection(0, -1); // Up
+        } else if (keyChar == 'a') {
+            snake.changeDirection(-1, 0); // Left
+        } else if (keyChar == 's') {
+            snake.changeDirection(0, 1); // Down
+        } else if (keyChar == 'd') {
+            snake.changeDirection(1, 0); // Right
+        }
+
+        // Implement other controls if needed
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
-
-    }    
+        // Handle key released events
+    }
 }
