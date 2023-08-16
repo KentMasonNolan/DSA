@@ -11,6 +11,15 @@ package Assignment1.Question_1;
 public class LinkedList<E extends Comparable<E>> {
 
     public int size = 0;
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public Node<E> head;
 
     public void addHead(E data) {

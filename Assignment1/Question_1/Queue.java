@@ -9,27 +9,33 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class Queue <E extends Comparable<E>>{
-    
-    private LinkedList<E> queue = new LinkedList();
-    
-    public void enqueue(E data)
-    {
-        
+public class Queue<E extends Comparable<E>> {
+
+    private LinkedList<E> queue = new LinkedList<>();
+
+    public void enqueue(E data) {
+        queue.add(data);
     }
-    
-    public E dequeue()
-    {
-        return null;
+
+    public E dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        E data = queue.getHead().data;
+        queue.removeFromHead();
+        return data;
     }
-    
-    public void printQueue()
-    {
-        
+
+    public void printQueue() {
+        queue.printLinkedList();
     }
-    
-    public int getSize()
-    {
-        return 0;
+
+    public int getSize() {
+        return queue.getSize();
+    }
+
+    public boolean isEmpty() {
+        return getSize() == 0;
     }
 }
+
