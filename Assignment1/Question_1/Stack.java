@@ -9,26 +9,32 @@ package Assignment1.Question_1;
  *
  * @author xhu
  */
-public class Stack <E extends Comparable>{
-    LinkedList<E> stack = new LinkedList();
+public class Stack<E extends Comparable<E>> {
 
-    public void push(E data)
-    {
+    private LinkedList<E> stack = new LinkedList<>();
 
+    public void push(E data) {
+        stack.addHead(data);
     }
 
-    public E pop()
-    {
-        return null;
+    public E pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        E data = stack.getHead().data;
+        stack.removeFromHead();
+        return data;
     }
 
-    public void printStack()
-    {
-
+    public void printStack() {
+        stack.printLinkedList();
     }
 
-    public int getSize()
-    {
-        return 0;
+    public int getSize() {
+        return stack.getSize();
+    }
+
+    public boolean isEmpty() {
+        return getSize() == 0;
     }
 }
