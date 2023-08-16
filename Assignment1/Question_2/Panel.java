@@ -19,12 +19,13 @@ public class Panel extends JPanel implements KeyListener {
     private Snake snake; // Add a reference to the Snake object
     private char[][] grid; // Add the grid to represent the game area
 
-    public Panel() {
+    public Panel(Snake snake) {
         this.addKeyListener(this);
         this.setFocusable(true);
 
-        // Initialize the snake and grid
-        snake = new Snake(5, 5); // Initialize the snake at position (5, 5)
+        this.snake = snake; // Assign the passed Snake object to the panel
+
+        // Initialize the grid
         grid = new char[10][10]; // Adjust the grid size as needed
 
         // Place letters and numbers randomly on the grid
@@ -56,6 +57,18 @@ public class Panel extends JPanel implements KeyListener {
         // Render the snake and other game elements here
 
         repaint();
+    }
+
+    void updateGridWithSnakePosition() {
+        // Clear the grid
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                grid[row][col] = 0; // Clear the cell
+            }
+        }
+
+        // Update the grid with the snake's head position
+        grid[snake.getHeadY()][snake.getHeadX()] = 'S'; // Use a suitable character
     }
 
     @Override

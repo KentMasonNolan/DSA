@@ -17,6 +17,55 @@ public class Snake {
     private LinkedList<Character> body; // Stores the letters eaten by the snake
     private int length;
     private int headX, headY;
+
+    public LinkedList<Character> getBody() {
+        return body;
+    }
+
+    public void setBody(LinkedList<Character> body) {
+        this.body = body;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getHeadX() {
+        return headX;
+    }
+
+    public void setHeadX(int headX) {
+        this.headX = headX;
+    }
+
+    public int getHeadY() {
+        return headY;
+    }
+
+    public void setHeadY(int headY) {
+        this.headY = headY;
+    }
+
+    public int getDirectionX() {
+        return directionX;
+    }
+
+    public void setDirectionX(int directionX) {
+        this.directionX = directionX;
+    }
+
+    public int getDirectionY() {
+        return directionY;
+    }
+
+    public void setDirectionY(int directionY) {
+        this.directionY = directionY;
+    }
+
     private int directionX, directionY;
 
     public Snake(int x, int y) {
