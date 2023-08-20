@@ -15,7 +15,7 @@ public class Node<E extends Comparable<E>> {
     public E data;
     public Node<E> next;
 
-    public Node(E data) {
+    public Node() {
         this.data = data;
         this.next = null;
     }

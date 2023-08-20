@@ -23,7 +23,8 @@ public class LinkedList<E extends Comparable<E>> {
     public Node<E> head;
 
     public void addHead(E data) {
-        Node<E> newNode = new Node<>(data);
+        Node<E> newNode = new Node<>();
+        newNode.data = data;
         newNode.next = head;
         head = newNode;
         size++;
@@ -34,7 +35,9 @@ public class LinkedList<E extends Comparable<E>> {
     }
 
     public void add(E data) {
-        Node<E> newNode = new Node<>(data);
+        Node<E> newNode = new Node<>();
+        newNode.data = data; // Set the data for the new node
+
         if (head == null) {
             head = newNode;
         } else {
@@ -46,6 +49,7 @@ public class LinkedList<E extends Comparable<E>> {
         }
         size++;
     }
+
 
     private void add(Node head, Node node) {
 
@@ -164,7 +168,13 @@ public class LinkedList<E extends Comparable<E>> {
     }
 
     public void addInOrder(E data) {
-        Node<E> newNode = new Node<>(data);
+
+        if (data == null) {
+            throw new IllegalArgumentException("Cannot add null data");
+        }
+
+        Node<E> newNode = new Node<>();
+        newNode.data = data;
         if (head == null || data.compareTo(head.data) < 0) {
             newNode.next = head;
             head = newNode;

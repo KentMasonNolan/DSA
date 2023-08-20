@@ -22,9 +22,10 @@ public class Stack<E extends Comparable<E>> {
             throw new IllegalStateException("Stack is empty");
         }
         E data = stack.getHead().data;
-        stack.removeFromHead();
+        stack.removeFromHead(); // Remove from the current instance, not from a variable named 'stack'
         return data;
     }
+
 
     public void printStack() {
         stack.printLinkedList();
