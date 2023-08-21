@@ -40,9 +40,9 @@ public class Panel extends JPanel implements KeyListener{
 
             ships[i] = new Ship(20, i*50, port); 
         }
-        ship_image = new ImageIcon("boat.png").getImage();
-        island_image = new ImageIcon("land.png").getImage();
-        boat_island_image = new ImageIcon("boat_land.png").getImage();
+        ship_image = new ImageIcon("images/boat.png").getImage();
+        island_image = new ImageIcon("images/land.png").getImage();
+        boat_island_image = new ImageIcon("images/boat_land.png").getImage();
     }
     
     public void paintComponent(Graphics g)
@@ -64,6 +64,7 @@ public class Panel extends JPanel implements KeyListener{
     @Override
     public void keyTyped(KeyEvent ke) {
         System.out.println("\""+ke.getKeyChar()+"\" is typed.");
+        repaint();
     }
 
     @Override
