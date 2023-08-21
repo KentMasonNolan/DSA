@@ -21,9 +21,9 @@ public class GamePanel extends JPanel implements ActionListener {
     final int x[] = new int[GAME_UNITS];
     final int y[] = new int[GAME_UNITS];
 
-    int applesEaten;
-    int appleX;
-    int appleY;
+    int playerScore;
+    int currentLetterX;
+    int currentLetterY;
     char direction = 'R';
     boolean running = false;
 
@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void startGame() {
-        newApple();
+        newStart();
         currentLetter = letters[random.nextInt(letters.length)];
         newNumber();
         generateRandomNumbers();
@@ -68,10 +68,11 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         draw(g);
 
-        g.setColor(Color.red);
+        g.setColor(Color.MAGENTA);
         g.setFont(new Font("Arial", Font.BOLD, 24));
-        g.drawString(String.valueOf(currentLetter), appleX+5, appleY+20); // Adjust the position to center the letter
+        g.drawString(String.valueOf(currentLetter), currentLetterX +5, currentLetterY +20); // Adjust the position to center the letter
 
+        g.setColor(Color.red);
         for (GeneratedNumber generatedNumber : generatedNumbers) {
             g.drawString(String.valueOf(numbers[generatedNumber.number]), generatedNumber.posX + UNIT_SIZE /4, generatedNumber.posY + 20);
         }
@@ -103,19 +104,14 @@ public class GamePanel extends JPanel implements ActionListener {
                 g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
             }
 
-            g.setColor(Color.red);
-            g.setFont(new Font("Arial", Font.BOLD, 24)); //draws the letter on the board.
-//            g.drawString(String.valueOf(currentLetter), 20, 40); // Adjust the position to center the letter
-
-
             for (int i = 0; i < bodyParts; i++) {
                 if (i == 0) {
-                    g.setColor(Color.green);
+                    g.setColor(Color.white);
                     g.setFont(new Font("Arial", Font.BOLD, 20));
                     g.drawString("@", x[i] + UNIT_SIZE / 4, y[i] + 20);
                 } else {
                     // Draw the snake's body using the letters from the eatenLetters list
-                    g.setColor(new Color(45, 180, 0));
+                    g.setColor(new Color(255, 255, 255));
                     if (i - 1 < eatenLetters.size()) { // Check if there's a corresponding letter
                         char bodyLetter = eatenLetters.get(i - 1);
                         g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -125,10 +121,6 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                 }
             }
-            g.setColor(Color.red);
-            g.setFont(new Font("Arial", Font.BOLD, 24));
-            FontMetrics metrics = getFontMetrics(g.getFont());
-//            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2, g.getFont().getSize());
         } else {
             gameOver(g);
         }
@@ -142,18 +134,15 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
 
-    public void newApple() {
-        appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+    public void newStart() {
+        currentLetterX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        currentLetterY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     public void move() {
         for (int i = bodyParts; i > 0; i--) {
             x[i] = x[i - 1];
             y[i] = y[i - 1];
-
-
-
         }
 
 
@@ -174,14 +163,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
-    public void checkApple() {
-        if ((x[0] == appleX) && (y[0] == appleY)) {
+    public void checkLetter() {
+        if ((x[0] == currentLetterX) && (y[0] == currentLetterY)) {
             bodyParts++;
-            applesEaten++;
+            playerScore++;
             eatenLetters.add(currentLetter);
             Collections.sort(eatenLetters);
             currentLetter = letters[random.nextInt(letters.length)]; // Generate a new random letter
-            newApple();
+            newStart();
         }
     }
     public void moveNumber() {
@@ -258,7 +247,7 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setColor(Color.red);
         g.setFont(new Font("Arial", Font.BOLD, 40));
         FontMetrics metrics1 = getFontMetrics(g.getFont());
-        g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: " + applesEaten)) / 2, g.getFont().getSize());
+        g.drawString("Score: " + playerScore, (SCREEN_WIDTH - metrics1.stringWidth("Score: " + playerScore)) / 2, g.getFont().getSize());
         //Game Over text
         g.setColor(Color.red);
         g.setFont(new Font("Arial", Font.BOLD, 40));
@@ -271,7 +260,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         if (running) {
             move();
-            checkApple();
+            checkLetter();
             checkCollisions();
         }
         repaint();
