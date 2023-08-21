@@ -64,7 +64,7 @@ public class Ship implements Runnable{
             x += 1; // Adjust the step size based on your preference
             callback.onPositionUpdated(); // Update the panel to show ship movement
             try {
-                Thread.sleep(50); // Introduce a delay to control ship speed
+                Thread.sleep(5); // Introduce a delay to control ship speed
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -82,7 +82,7 @@ public class Ship implements Runnable{
             x -= 1; // Adjust the step size based on your preference
             callback.onPositionUpdated();
             try {
-                Thread.sleep(50);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
