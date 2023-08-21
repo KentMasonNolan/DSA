@@ -5,6 +5,9 @@
  */
 package Assignment1.Question_3;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  *
  * @author xhu
@@ -15,7 +18,18 @@ public class Port {
     int y;
     String name = "Port";
 
+    private Lock portLock;
+
     boolean isPortAvailable = true;
+    boolean isPathAvailable = true;
+
+    public boolean isPathAvailable() {
+        return isPathAvailable;
+    }
+
+    public void setPathAvailable(boolean pathAvailable) {
+        isPathAvailable = pathAvailable;
+    }
 
     public boolean isPortAvailable() {
         return isPortAvailable;
@@ -29,6 +43,15 @@ public class Port {
     {
         this.x = x;
         this.y = y;
+        portLock = new ReentrantLock();
 
+    }
+
+    public boolean tryUsePort() {
+        return portLock.tryLock(); // Attempt to acquire the lock
+    }
+
+    public void leavePort() {
+        portLock.unlock(); // Release the lock
     }
 }

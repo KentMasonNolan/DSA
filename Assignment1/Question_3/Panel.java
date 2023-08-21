@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  */
 public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     
-    int number_ship = 2;
+    int number_ship = 20;
     boolean program_starts = false;
     Ship[] ships = new Ship[number_ship];
 
@@ -29,7 +29,15 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     Image ship_image;
     Image island_image;
     Image boat_island_image;
-    
+
+    private int currentShipIndex = 0; // Keep track of the current ship to move
+
+    private String crashMessage = ""; // Variable to store crash message
+
+    public void setCrashMessage(String message) {
+        crashMessage = message;
+    }
+
     public Panel()
     {
         this.addKeyListener(this);
@@ -39,10 +47,10 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
         singleShip = new Ship(20, 0, port); // Create a single ship instance
 
 
-//        for(int i = 0; i < number_ship; i++)
-//        {
-//            ships[i] = new Ship(20, i*50, port);
-//        }
+        for(int i = 0; i < number_ship; i++)
+        {
+            ships[i] = new Ship(20, i*50, port);
+        }
 
 //        startShipThreads();
 
@@ -52,27 +60,23 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
 
     }
 
-//    public void startShipThreads() {
-//        for (int i = 0; i < ships.length; i++) {
-//            Thread shipThread = new Thread(ships[i]);
-//            shipThread.start();
-//        }
-//    }
-    
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
         g.setFont(new Font("Monospaced", Font.BOLD, 20));
         
         
-//        for(int i = 0; i < ships.length; i++)
-//        {
-//            g.drawImage(ship_image, ships[i].x, ships[i].y, this);
-//        }
+        for(int i = 0; i < ships.length; i++)
+        {
+            g.drawImage(ship_image, ships[i].x, ships[i].y, this);
+        }
 
-        g.drawImage(ship_image, singleShip.x, singleShip.y, this);
-                
         g.drawImage(island_image, port.x, port.y, this);
+
+        if (!crashMessage.isEmpty()) {
+            g.setColor(Color.RED);
+            g.drawString(crashMessage, 20, 20);
+        }
     }
 
     public void onPositionUpdated() {
@@ -82,12 +86,20 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     @Override
     public void keyTyped(KeyEvent ke) {
         System.out.println("\""+ke.getKeyChar()+"\" is typed.");
-        new Thread(singleShip).start();
 
-        singleShip.setCallback(this); // Set the callback before starting the thread
 
+            for (Ship ship : ships) {
+                if (port.isPathAvailable) {
+                    ship.setCallback(this);
+                    setCrashMessage("");
+                    new Thread(ship).start();
+                } else {
+                    System.out.println("Port is busy!");
+                }
+            }
         repaint();
     }
+
 
     @Override
     public void keyPressed(KeyEvent ke) {

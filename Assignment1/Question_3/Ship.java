@@ -25,6 +25,8 @@ public class Ship implements Runnable{
     int y;
     private Port port;
 
+    final int originalX = 20;
+
     public int getX() {
         return x;
     }
@@ -58,9 +60,8 @@ public class Ship implements Runnable{
 
     public void moveTowardsPort(Port port) {
 
-        int originalX = x;
-
         while (x < port.x) {
+            port.setPathAvailable(false);
             x += 1; // Adjust the step size based on your preference
             callback.onPositionUpdated(); // Update the panel to show ship movement
             try {
@@ -72,7 +73,13 @@ public class Ship implements Runnable{
 
         // Ship reached the port's x position, wait and return
         try {
-            Thread.sleep(1000); // Wait for 1 second
+            if (port.isPortAvailable){
+                port.setPortAvailable(false);
+                Thread.sleep(1000); // Wait for 1 second
+                port.setPortAvailable(true);
+            } else {
+                callback.setCrashMessage("CRASH!");
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -87,10 +94,54 @@ public class Ship implements Runnable{
                 e.printStackTrace();
             }
         }
+        port.setPathAvailable(true);
+    }
+
+    public void moveTowardsPortLock(Port port) {
+        if (port.tryUsePort()) { // Try to acquire the lock
+            while (x < port.x) {
+                x += 1; // Adjust the step size based on your preference
+                callback.onPositionUpdated(); // Update the panel to show ship movement
+                try {
+                    Thread.sleep(5); // Introduce a delay to control ship speed
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Ship reached the port's x position, wait and return
+            try {
+                if (port.isPortAvailable()) {
+                    port.setPortAvailable(false);
+                    Thread.sleep(1000); // Wait for 1 second
+                    port.setPortAvailable(true);
+                } else {
+                    callback.setCrashMessage("CRASH!");
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Return movement
+            while (x > originalX) {
+                x -= 1; // Adjust the step size based on your preference
+                callback.onPositionUpdated();
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            port.leavePort(); // Release the lock after ship is done
+        } else {
+            callback.setCrashMessage("CRASH!"); // Port is busy
+        }
     }
 
     @Override
     public void run() {
-        moveTowardsPort(port);
+        moveTowardsPortLock(port);
+//        moveTowardsPort(port);
     }
 }
