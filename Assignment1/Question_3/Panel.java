@@ -34,15 +34,25 @@ public class Panel extends JPanel implements KeyListener{
         this.setFocusable(true);
         this.setBackground(Color.WHITE);
         port = new Port(900, 500);
-        
+
         for(int i = 0; i < number_ship; i++)
         {
-
-            ships[i] = new Ship(20, i*50, port); 
+            ships[i] = new Ship(20, i*50, port);
         }
-        ship_image = new ImageIcon("images/boat.png").getImage();
-        island_image = new ImageIcon("images/land.png").getImage();
-        boat_island_image = new ImageIcon("images/boat_land.png").getImage();
+
+        startShipThreads();
+
+        ship_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\boat.png").getImage();
+        island_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\land.png").getImage();
+        boat_island_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\boat_land.png").getImage();
+
+    }
+
+    public void startShipThreads() {
+        for (int i = 0; i < ships.length; i++) {
+            Thread shipThread = new Thread(ships[i]);
+            shipThread.start();
+        }
     }
     
     public void paintComponent(Graphics g)
@@ -57,8 +67,9 @@ public class Panel extends JPanel implements KeyListener{
         }
                 
         g.drawImage(island_image, port.x, port.y, this);
+        System.out.println(port.x);
+        System.out.println(port.y);
 
-        repaint();
     }
 
     @Override

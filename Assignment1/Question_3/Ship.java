@@ -20,7 +20,7 @@ package Assignment1.Question_3;
  *
  * @author xhu
  */
-public class Ship{
+public class Ship implements Runnable{
     int x;
     int y;
     String name = "Ship";
@@ -29,5 +29,10 @@ public class Ship{
     {
         this.x = x;
         this.y = y;
-    }    
+    }
+
+    @Override
+    public void run() {
+
+    }
 }
