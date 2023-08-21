@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author xhu
  */
-public class Panel extends JPanel implements KeyListener{
+public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     
     int number_ship = 20;
     boolean program_starts = false;
@@ -70,6 +70,10 @@ public class Panel extends JPanel implements KeyListener{
         System.out.println(port.x);
         System.out.println(port.y);
 
+    }
+
+    public void onPositionUpdated() {
+        repaint(); // Repaint the panel when ship position changes
     }
 
     @Override
