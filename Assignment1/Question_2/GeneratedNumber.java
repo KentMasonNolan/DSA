@@ -1,4 +1,4 @@
-package Assignment1.Examples;
+package Assignment1.Question_2;
 
 class GeneratedNumber {
     int number;
