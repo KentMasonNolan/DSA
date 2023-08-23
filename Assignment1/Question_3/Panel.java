@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Assignment1.Question_3;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,10 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
-/**
- *
- * @author xhu
- */
 public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     
     int number_ship = 20;
@@ -54,7 +45,7 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
 
 //        startShipThreads();
 
-        ship_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\boat.png").getImage();
+        ship_image = new ImageIcon("boat.png").getImage();
         island_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\land.png").getImage();
         boat_island_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\boat_land.png").getImage();
 
