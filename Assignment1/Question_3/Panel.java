@@ -8,10 +8,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JPanel;
 
 /**
  *
@@ -20,17 +19,17 @@ import javax.swing.JPanel;
 public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     
     int number_ship = 20;
-    boolean program_starts = false;
     Ship[] ships = new Ship[number_ship];
 
     Ship singleShip;
     Port port;
-    
+
+    private JToggleButton syncToggle;
+
+
     Image ship_image;
     Image island_image;
     Image boat_island_image;
-
-    private int currentShipIndex = 0; // Keep track of the current ship to move
 
     private String crashMessage = ""; // Variable to store crash message
 
@@ -46,13 +45,18 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
         port = new Port(900, 500);
         singleShip = new Ship(20, 0, port); // Create a single ship instance
 
+        //ChatGPT did the buttons below
+
+        syncToggle = new JToggleButton("Synchronized Mode");
+        syncToggle.setBounds(20, 40, 150, 30); // Adjust the position and size as needed
+        syncToggle.setFocusable(false);
+        syncToggle.addActionListener(e -> toggleSyncMode());
+        add(syncToggle);
 
         for(int i = 0; i < number_ship; i++)
         {
             ships[i] = new Ship(20, i*50, port);
         }
-
-//        startShipThreads();
 
         ship_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\boat.png").getImage();
         island_image = new ImageIcon("C:\\Users\\kentn\\IdeaProjects\\DSA\\Assignment1\\Question_3\\images\\land.png").getImage();
@@ -64,11 +68,15 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     {
         super.paintComponent(g);
         g.setFont(new Font("Monospaced", Font.BOLD, 20));
-        
-        
-        for(int i = 0; i < ships.length; i++)
-        {
-            g.drawImage(ship_image, ships[i].x, ships[i].y, this);
+
+
+        for (int i = 0; i < ships.length; i++) {
+            Ship ship = ships[i];
+            if (ship.hasReachedPort) {
+                g.drawImage(boat_island_image, ship.x, ship.y, this);
+            } else {
+                g.drawImage(ship_image, ship.x, ship.y, this);
+            }
         }
 
         g.drawImage(island_image, port.x, port.y, this);
@@ -79,6 +87,16 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
         }
     }
 
+
+    private void toggleSyncMode() {
+        if (syncToggle.isSelected()) {
+            syncToggle.setText("Unsynchronized Mode");
+        } else {
+            syncToggle.setText("Synchronized Mode");
+        }
+    }
+
+
     public void onPositionUpdated() {
         repaint(); // Repaint the panel when ship position changes
     }
@@ -87,18 +105,24 @@ public class Panel extends JPanel implements KeyListener, ShipPositionCallback{
     public void keyTyped(KeyEvent ke) {
         System.out.println("\""+ke.getKeyChar()+"\" is typed.");
 
+        for (Ship ship : ships) {
+            if (port.isPathAvailable) {
+                ship.setCallback(this);
+                setCrashMessage("");
 
-            for (Ship ship : ships) {
-                if (port.isPathAvailable) {
-                    ship.setCallback(this);
-                    setCrashMessage("");
-                    new Thread(ship).start();
+                if (syncToggle.isSelected()) {
+                    new Thread(ship::moveTowardsPortSynchronized).start();
                 } else {
-                    System.out.println("Port is busy!");
+                    new Thread(ship::moveTowardsPort).start();
                 }
+            } else {
+                System.out.println("Port is busy!");
             }
+        }
         repaint();
     }
+
+
 
 
     @Override
