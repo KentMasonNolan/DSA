@@ -51,7 +51,7 @@ public class Ship implements Runnable{
             x += 1;
             callback.onPositionUpdated(); // Update the panel to show ship movement
             try {
-                Thread.sleep(10); // Introduce a delay to control ship speed
+                Thread.sleep(5); // Introduce a delay to control ship speed
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
