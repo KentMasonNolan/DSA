@@ -23,15 +23,15 @@ public class SortArray <E extends Comparable>{
         this.array = array;
     }
     
-    public void quickSort()
-    {
-        
-    }
-    
-    private void quickSort()
-    {
-        
-    }
+//    public void quickSort()
+//    {
+//
+//    }
+//
+//    private void quickSort()
+//    {
+//
+//    }
     
     private void swap()
     {
