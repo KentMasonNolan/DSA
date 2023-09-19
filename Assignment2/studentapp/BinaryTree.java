@@ -12,20 +12,22 @@ package Assignment2.studentapp;
 public class BinaryTree <E, F extends Comparable> {
     public Node root;
     public int number_of_nodes;
+    private Node[] nodeList;
     
     public BinaryTree(Node node)
     {
-
+        this.root = node;
     }
     
     public BinaryTree(E element, F key)
     {
+        Node node = new Node(element, key);
 
     }
     
     public BinaryTree()
     {
-        
+        this.root = null;
     }
     
     public void addElement(E element, F key)

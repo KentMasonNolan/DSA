@@ -12,8 +12,20 @@ package Assignment2.studentapp;
 public class Node <E, F extends Comparable> implements Comparable <Node>{
 
 
+    private E element;
+    private F key;
+    private Node left;
+    private Node right;
+
+    public Node(E element, F key) {
+        this.element = element;
+        this.key = key;
+        this.left = null;
+        this.right = null;
+    }
+
     @Override
     public int compareTo(Node t) {
-        return 0;
+        return key.compareTo(t.key);
     }
 }
