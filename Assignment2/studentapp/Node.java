@@ -17,6 +17,16 @@ public class Node <E, F extends Comparable> implements Comparable <Node>{
     public Node left;
     public Node right;
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "element=" + element +
+                ", key=" + key +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
+    }
+
     public Node(E element, F key) {
         this.element = element;
         this.key = key;

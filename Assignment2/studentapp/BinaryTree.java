@@ -21,7 +21,7 @@ public class BinaryTree <E, F extends Comparable> {
     
     public BinaryTree(E element, F key)
     {
-        Node node = new Node(element, key);
+        this.root = new Node(element, key);
         this.number_of_nodes = 0;
 
     }
@@ -49,14 +49,21 @@ public class BinaryTree <E, F extends Comparable> {
             } else {
             if (root.right == null) {
                 root.right = node;
+            } else {
+                addNode(root.right, node);
             }
         }
     }
 
-    public void traversal(Node root)
-    {
-
+    private void traverse(Node node) {
+        if (node == null) {
+            return;
+        }
+        traverse(node.left);
+        System.out.println(node.toString());
+        traverse(node.right);
     }
+
     
     public Node[] toSortedList()
     {
