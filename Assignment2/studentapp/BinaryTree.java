@@ -33,8 +33,9 @@ public class BinaryTree <E, F extends Comparable> {
     
     public void addElement(E element, F key)
     {
-
-
+        Node node = new Node(element, key);
+        addNode(this.root, node);
+        number_of_nodes++;
     }
 
     private void addNode(Node root, Node node) {
