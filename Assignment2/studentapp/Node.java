@@ -14,8 +14,8 @@ public class Node <E, F extends Comparable> implements Comparable <Node>{
 
     private E element;
     private F key;
-    private Node left;
-    private Node right;
+    public Node left;
+    public Node right;
 
     public Node(E element, F key) {
         this.element = element;

@@ -22,6 +22,7 @@ public class BinaryTree <E, F extends Comparable> {
     public BinaryTree(E element, F key)
     {
         Node node = new Node(element, key);
+        this.number_of_nodes = 0;
 
     }
     
@@ -33,13 +34,24 @@ public class BinaryTree <E, F extends Comparable> {
     public void addElement(E element, F key)
     {
 
-    }
-    
-    public void addNode(Node root, Node node)
-    {        
 
     }
-    
+
+    private void addNode(Node root, Node node) {
+        if (root.compareTo(node.left) < 0) {
+            if (root.left == null) {
+                root.left = node;
+            }
+            else {
+                addNode(root.left, node);
+                }
+            } else {
+            if (root.right == null) {
+                root.right = node;
+            }
+        }
+    }
+
     public void traversal(Node root)
     {
 

@@ -66,4 +66,5 @@ public class Student {
     public String toString() {
         return this.name + "\n" + this.score + "\n" + this.comments;
     }
+
 }
