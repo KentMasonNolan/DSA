@@ -38,4 +38,5 @@ public class Node <E, F extends Comparable> implements Comparable <Node>{
     public int compareTo(Node t) {
         return key.compareTo(t.key);
     }
+
 }
