@@ -21,7 +21,7 @@ public class BinaryTree<E, F extends Comparable> {
 
     public BinaryTree(E element, F key) {
         this.root = new Node(element, key);
-        this.number_of_nodes = 0;
+        this.number_of_nodes = 1;
 
     }
 
@@ -57,10 +57,12 @@ public class BinaryTree<E, F extends Comparable> {
 
 
     public Node[] toSortedList() {
+        index = 0; // Reset the index
         nodeList = new Node[number_of_nodes];
         toSortedList(root);
         return nodeList;
     }
+
 
     private void toSortedList(Node root) {
         if (root == null) {
@@ -92,7 +94,22 @@ public class BinaryTree<E, F extends Comparable> {
     }
 
     public void reverseOrder() {
-        reverseOrder(root);
+        swapChildren(root);
+    }
+
+    private void swapChildren(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        // Swap left and right children
+        Node temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        // Recursively swap children of left and right subtrees
+        swapChildren(root.left);
+        swapChildren(root.right);
     }
 
     private void reverseOrder(Node root) {

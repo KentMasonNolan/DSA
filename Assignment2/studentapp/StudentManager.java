@@ -25,12 +25,12 @@ public class StudentManager<E,F  extends Comparable> {
         addToTree(student, name); // Add to bTreeName
     }
 
-    public void addToTree(Student student, F key) {
-        if (key instanceof Float) {
-            bTreeScore.addElement(student, (Float) key);
-        } else if (key instanceof String) {
-            bTreeName.addElement(student, (String) key);
-        }
+    public void addToTree(Student student, Float score) {
+        bTreeScore.addElement(student, score);
+    }
+
+    public void addToTree(Student student, String name) {
+        bTreeName.addElement(student, name);
     }
 
     public Student findStudent(E key) {
