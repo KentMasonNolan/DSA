@@ -12,8 +12,8 @@ package Assignment2.studentapp;
 public class Node <E, F extends Comparable> implements Comparable <Node>{
 
 
-    private E element;
-    private F key;
+    public E element;
+    F key;
     public Node left;
     public Node right;
 
