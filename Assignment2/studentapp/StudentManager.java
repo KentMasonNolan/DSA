@@ -7,7 +7,7 @@ package Assignment2.studentapp;
 
 /**
  *
- * @author xhu
+ * @author Kent
  */
 public class StudentManager<E,F  extends Comparable> {
     

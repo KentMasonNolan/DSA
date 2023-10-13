@@ -6,12 +6,12 @@
 package Assignment2.studentapp;
 
 /**
- * @author xhu
+ * @author Kent
  */
 public class BinaryTree<E, F extends Comparable> {
     public Node<E, F> root;
     public int number_of_nodes;
-    private Node[] nodeList;
+    private Node<E, F>[] nodeList;
 
     private int index = 0;
 
