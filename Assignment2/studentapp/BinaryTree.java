@@ -93,6 +93,30 @@ public class BinaryTree<E, F extends Comparable> {
         }
     }
 
+    public Student searchStudentByName(Node root, String name) {
+        if (root == null) {
+            return null;
+        }
+
+        // Assuming 'element' is of type 'Student' and 'name' is a public field.
+        // Cast 'element' to 'Student' and compare 'name' field directly.
+        Student student = (Student) root.element;
+        if (student.name.equals(name)) {
+            return student;
+        }
+
+        // Then check the left subtree
+        Student foundStudent = searchStudentByName(root.left, name);
+        if (foundStudent != null) {
+            return foundStudent;
+        }
+
+        // Then check the right subtree
+        return searchStudentByName(root.right, name);
+    }
+
+
+
     public void reverseOrder() {
         swapChildren(root);
     }
