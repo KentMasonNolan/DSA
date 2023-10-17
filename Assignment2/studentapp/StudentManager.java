@@ -33,15 +33,35 @@ public class StudentManager<E,F  extends Comparable> {
         bTreeName.addElement(student, name);
     }
 
-    public Student findStudent(E key) {
+//    public Student findStudent(E key) {
+//        if (key instanceof Float) {
+//            return bTreeScore.searchElement((Float) key);
+//        } else if (key instanceof String) {
+//            // If the key is a String, we assume it's a name and perform a full tree search
+//            return searchStudentByName(bTreeName.root, (String) key);
+//        }
+//        return null;
+//    }
+
+    public Student findStudent(F key) {
         if (key instanceof Float) {
-            return bTreeScore.searchElement((Float) key);
+            for (int i = 0; i < bTreeScore.nodeList.length; i++) {
+                if (bTreeScore.nodeList[i].key.equals(key)) {
+                    Student student = (Student) bTreeScore.nodeList[i].element;
+                    return student;
+                }
+            }
         } else if (key instanceof String) {
-            // If the key is a String, we assume it's a name and perform a full tree search
-            return searchStudentByName(bTreeName.root, (String) key);
+            for (int i = 0; i < bTreeName.nodeList.length; i++) {
+                if (bTreeName.nodeList[i].key.equals(key)) {
+                    Student student = bTreeName.nodeList[i].element;
+                    return student;
+                }
+            }
         }
         return null;
     }
+
 
     public Student searchStudentByName(Node root, String name) {
         if (root == null) {
@@ -64,6 +84,8 @@ public class StudentManager<E,F  extends Comparable> {
         // Then check the right subtree
         return searchStudentByName(root.right, name);
     }
+
+
 
 
 
