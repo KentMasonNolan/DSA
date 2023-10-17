@@ -5,11 +5,12 @@
  */
 package Assignment2.maze;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
  *
- * @author xhu
+ * @author Kent
  */
 public class MazeApp {
 
@@ -17,14 +18,13 @@ public class MazeApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        JFrame frame = new JFrame("Maze");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Panel panel = new Panel();
-        frame.add(panel);
-        frame.setSize(700, 600);
-        frame.setVisible(true);
-
+        JFrame window = new JFrame("Maze");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Panel mainPanel = new Panel();
+        window.add(mainPanel);
+        window.setSize(700, 600);
+        window.setVisible(true);
+        window.setResizable(false);
     }
-    
+
 }

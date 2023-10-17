@@ -12,19 +12,19 @@ import java.util.Scanner;
 
 /**
  *
- * @author xhu
+ * @author Kent
  */
 public class FileManager {
     public String name;
     public int numberOfLines;
     public String[] lineData;
     public String data="";
-    
+
     public FileManager()
     {
         numberOfLines = 0;
-    }        
-    
+    }
+
     public FileManager(String fileName)
     {
         this.name = fileName;
@@ -37,7 +37,7 @@ public class FileManager {
             {
                 myScanner.nextLine();
                 numberOfLines++;
-            }  
+            }
             myScanner.close();
         }
         catch(IOException e)
@@ -46,7 +46,7 @@ public class FileManager {
         }
         lineData = new String[numberOfLines];
     }
-     public void readFile(String fileName)
+    public void readFile(String fileName)
     {
         File f;
         if(fileName == null)
@@ -64,8 +64,8 @@ public class FileManager {
                 lineData[lineNum] = line;
                 data += line;
                 lineNum++;
-                
-            }  
+
+            }
             myScanner.close();
         }
         catch(IOException e)
@@ -73,11 +73,11 @@ public class FileManager {
             System.out.println("Cannot read the file"+e.getMessage());
         }
     }
-    
+
     public void writeFile(String fileName, String c)
     {
         File f;
-        
+
         if(fileName == null)
             f = new File(this.name);
         else
@@ -85,7 +85,7 @@ public class FileManager {
         try
         {
             f.createNewFile();
-            FileWriter writer = new FileWriter(f); 
+            FileWriter writer = new FileWriter(f);
             writer.write(c);
             writer.flush();
             writer.close();

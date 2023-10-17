@@ -1,63 +1,44 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Assignment2.maze;
 
+/**
+ *
+ * @author Kent
+ */
 public class Node {
 
-    private String name;
-    private int x;
-    private int y;
-    private Node left;
-    private Node right;
+    public String identifier;
+    public int posX;
+    public int posY;
+    public String leftNodeName;
+    public String rightNodeName;
+    public Node leftConnection;
+    public Node rightConnection;
+    public Node prior;
 
-    public Node(String name, int x, int y) {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.left = null;
-        this.right = null;
+    public Node() {
+        this.identifier = null;
+        this.posX = 0;
+        this.posY = 0;
+        this.leftNodeName = null;
+        this.rightNodeName = null;
+        this.leftConnection = null;
+        this.rightConnection = null;
+        this.prior = null;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Node getLeft() {
-        return left;
-    }
-
-    public void setLeft(Node left) {
-        this.left = left;
-    }
-
-    public Node getRight() {
-        return right;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
-    }
-
-    public void setVisited(boolean b) {
-    }
-
-//    public Node[] getNeighbors() {
-//    }
-
-//    public boolean isVisited() {
-//    }
-
-    public void addNeighbor(Node node) {
+    public Node(String identifier, int posX, int posY, String leftNodeName, String rightNodeName) {
+        this.identifier = identifier;
+        this.posX = posX;
+        this.posY = posY;
+        this.leftNodeName = leftNodeName;
+        this.rightNodeName = rightNodeName;
+        this.leftConnection = null;
+        this.rightConnection = null;
+        this.prior = null;
     }
 }
+
