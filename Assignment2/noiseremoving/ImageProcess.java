@@ -193,6 +193,20 @@ public class ImageProcess {
                 
                 // please add your code here
                 // 1. create SortArray object
+                SortArray<Integer> sortArrayR = new SortArray<>(intensity_r);
+                sortArrayR.setArray(intensity_r);
+                sortArrayR.quickSort();
+
+                SortArray<Integer> sortArrayG = new SortArray<>(intensity_g);
+                sortArrayG.setArray(intensity_g);
+                sortArrayG.quickSort();
+
+                SortArray<Integer> sortArrayB = new SortArray<>(intensity_b);
+                sortArrayB.setArray(intensity_b);
+                sortArrayB.quickSort();
+
+
+
                 // 2. pass intensity_r[] to the SortArray object
                 // 3. call quickSort() from SortArray object
                 // 4. do steps 2 and 3 for intensity_g and intensity_b

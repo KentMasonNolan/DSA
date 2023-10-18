@@ -1,13 +1,6 @@
-/* To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Assignment2.noiseremoving;
 
-/**
- * @author xhu
- */
-public class SortArray<E extends Comparable> {
+public class SortArray<E extends Comparable<E>> {
 
     E[] array;
 
@@ -19,15 +12,38 @@ public class SortArray<E extends Comparable> {
         this.array = array;
     }
 
-//    public void quickSort() {
-//
-//    }
-//
-//    private void quickSort() {
-//
-//    }
+    // main quickSort function
+    public void quickSort() {
+        quickSort(0, array.length - 1);
+    }
 
-    private void swap() {
+    // helper function for quicksort
+    private void quickSort(int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(low, high);
+            quickSort(low, pivotIndex - 1);
+            quickSort(pivotIndex + 1, high);
+        }
+    }
 
+    // function to perform the partition and returns pivot index
+    private int partition(int low, int high) {
+        E pivot = array[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (array[j].compareTo(pivot) <= 0) {
+                i++;
+                swap(i, j);
+            }
+        }
+        swap(i + 1, high);
+        return i + 1;
+    }
+
+    // function to swap elements at index i and j
+    private void swap(int i, int j) {
+        E temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }
